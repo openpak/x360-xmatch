@@ -1,0 +1,24 @@
+# PRIMARY host. OpenPak Xbox 360 matchmaking (x360-xmatch): Live service 6 XRL requests the
+# security gateway tunnels to the primary's Traefik. Identity headers are trusted only with the
+# gateway key.
+[Unit]
+Description=OpenPak Xbox 360 matchmaking (x360-xmatch)
+
+[Container]
+ContainerName=openpak-x360-xmatch
+Image=ghcr.io/openpak/x360-xmatch:latest
+AutoUpdate=registry
+Network=openpak.network
+IP=10.89.2.200
+Environment=X360_XMATCH_ADDR=:10006
+EnvironmentFile=%h/openpak/deploy/x360-gateway-key.env
+ReadOnly=true
+DropCapability=ALL
+NoNewPrivileges=true
+UserNS=keep-id:uid=100,gid=101
+
+[Service]
+Restart=always
+
+[Install]
+WantedBy=default.target
