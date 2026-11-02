@@ -43,3 +43,7 @@ record array header is 0x66: **each record is padded to 4 bytes on the wire**.
 
 `u32 length`, new `XNKID` (fresh, as for a create), existing `XNKID`, `u32 title id`, `XNADDR`,
 attributes. Reply: one record as above, unpadded.
+
+## Derivation
+
+Schemas of 0x100-0x105 were dumped from the 17559 XRL table, with field order matched to the XAM builders. Bodies built by the tests decode field for field under the XAM codec model (requests 0x100/0x104, replies 0x100/0x104/0x105); the codec requires 4-byte record alignment.
